@@ -1,5 +1,7 @@
+import styles from './home.module.css'
+
 export default function Home(){
   return (
-    <div>Hello World</div>
+    <div className="container">Homepage</div>
   )
 }

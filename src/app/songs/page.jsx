@@ -1,5 +1,5 @@
 export default function Songs(){
     return (
-        <div>Songs</div>
+        <div className='container'>Songs</div>
     )
 }

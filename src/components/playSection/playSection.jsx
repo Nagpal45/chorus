@@ -1,5 +1,7 @@
+import styles from './playSection.module.css'
+
 export default function PlaySection() {
   return (
-    <div>PlaySection</div>
+    <div className={styles.section}>PlaySection</div>
   )
 }

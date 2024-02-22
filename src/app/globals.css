@@ -1,0 +1,66 @@
+:root{
+    --c1: #D0D2E1;
+    --c2: #9DA2B8;
+    --c3: #A7A9C9;
+    --c4: #131110;
+    --c5: #C5B2C2;
+    --c6: #5D5B60;
+    --c7: #99698A;
+    --c8: #4f2F3C;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: var(--c1);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 99%;
+    height: 98%;
+    background-color: rgba(255,255,255,0.15);
+    border-radius: 2vw;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.mainContainer{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    flex: 6.5;
+    padding-top: 0.5vw;
+}
+
+.playContainer{
+    width: 100%;
+    flex:1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.container{
+    flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.4);
+    height: 100%;
+    border-radius: 2vw;
+}
