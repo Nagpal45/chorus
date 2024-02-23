@@ -1,13 +1,37 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./sidebar.module.css";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
-  const [active, setActive] = useState("Foryou");
+  const [active, setActive] = useState("");
 
-  const handleClick = (item) =>{
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname === "/") {
+      setActive("Foryou");
+    } else if (pathname === "/library") {
+      setActive("library");
+    } else if (pathname === "/radio") {
+      setActive("radio");
+    } else if (pathname === "/video") {
+      setActive("video");
+    } else if (pathname === "/songs") {
+      setActive("liked");
+    } else if (pathname === "/albums") {
+      setActive("albums");
+    } else if (pathname === "/artists") {
+      setActive("artists");
+    } else if (pathname === "/recent") {
+      setActive("recent");
+    }
+  }, [pathname]);
+
+  const handleClick = (item) => {
     setActive(item);
-  }
+  };
   return (
     <div className={styles.section}>
       <div className={styles.home}>
@@ -26,8 +50,9 @@ export default function Sidebar() {
         </div>
       </div>
       <div className={styles.recommend}>
-        <p>Recommend</p>
+        <p>Recommended</p>
         <div className={styles.recommendList}>
+          <Link href="/">
           <div className={`${styles.listItem} ${
             active === "Foryou" ? styles.active : ""
           }`} onClick={()=>handleClick('Foryou')}>
@@ -44,6 +69,7 @@ export default function Sidebar() {
             </svg>
             <p>For You</p>
           </div>
+          </Link>
           <div className={`${styles.listItem} ${
             active === "library" ? styles.active : ""
           }`} onClick={()=>handleClick('library')}>
@@ -94,6 +120,7 @@ export default function Sidebar() {
       <div className={styles.myMusic}>
         <p>My Music</p>
         <div className={styles.myMusicList}>
+        <Link href="/songs">
           <div className={`${styles.listItem} ${
             active === "liked" ? styles.active : ""
           }`} onClick={()=>handleClick('liked')}>
@@ -110,6 +137,7 @@ export default function Sidebar() {
             </svg>
             <p>Liked Song</p>
           </div>
+        </Link>
           <div className={`${styles.listItem} ${
             active === "albums" ? styles.active : ""
           }`} onClick={()=>handleClick('albums')}>
