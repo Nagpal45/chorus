@@ -1,8 +1,134 @@
 .section{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: center;
     flex: 1;
     height: 100%;
+
+}
+
+.home{
+    display: flex;
+    flex-direction: column;
+    justify-content :flex-start;
+        margin-top:1vh;
+        margin-left: 4vh;
+        margin-bottom: 2vh;
+}
+
+.homeButton{
+ display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 12vh;
+    height: 5vh;
+    border: none;
+    font-size: 2vh;
+    font-weight: 550;
+    padding-right: 2vh ;
+    background-color:transparent ;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.homeButton:hover{
+    transform: scale(1.05);
+}
+
+.recomend {
+    margin-left: 4vh;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #9DA2B8;
+    margin-bottom: 0.5vh;
+}
+
+.recomendList ,.myMusicList ,.playlistList{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.recomendList button ,.myMusicList button ,.playlistList button{
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 5vh;
+    border: none;
+    font-size: 1.7vh;
+    margin-bottom: 0.5vh;
+    margin-left: 2.5vh;
+    margin-top: 0.5vh;
+    font-weight: 550;
+    background-color:transparent ;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    padding-left: 1vh;
+    border-radius: 1vh;
+
+}
+
+
+.myMusic{
+    margin-left: 4vh;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+    height: 100%;
+    
+    color: #9DA2B8;
+
+}
+
+
+.playlist{
+    margin-left: 4vh;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+    height: 100%;
+    
+    color: #9DA2B8;
+}
+
+
+.myMusicList button:hover, .recomendList button:hover, .playlistList button:hover{
+    transform: scale(1.1);
+    transition: transform 0.1s ease;
+    background-color: white;
+}
+
+.newPlaylistButton{
+    margin-left: 3.5vh;
+    background-color: #d860d2;
+    width: 23vh;
+    height: 6vh;
+    font-size: 2vh;
+    margin-bottom: 2vh;
+    border-radius: 2vh;
+    border: #d860d2;
+    font-weight: 530;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding-left: 3.5vh;
+    padding-right: 5.5vh;
+    cursor: pointer;
+    transition: background-color 0.1s ease, transform 0.1s ease; 
+}
+
+
+
+.newPlaylistButton:hover{
+    background-color: #db4cd4;
+    transform: scale(1.05);
+     
 }
