@@ -3,132 +3,103 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    flex: 1;
+    flex: 0.8;
     height: 100%;
-
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding-left: 1.3vw;
 }
 
 .home{
     display: flex;
-    flex-direction: column;
-    justify-content :flex-start;
-        margin-top:1vh;
-        margin-left: 4vh;
-        margin-bottom: 2vh;
+    align-items: center;
+    flex: 0.4;
 }
 
 .homeButton{
- display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 12vh;
-    height: 5vh;
-    border: none;
-    font-size: 2vh;
-    font-weight: 550;
-    padding-right: 2vh ;
-    background-color:transparent ;
-    cursor: pointer;
-    transition: transform 0.1s ease;
+    font-size: 1.4vw;
+    font-weight: 700;
 }
 
-.homeButton:hover{
-    transform: scale(1.05);
+.homeButton svg{
+    margin-right: 0.5vw;
 }
 
-.recomend {
-    margin-left: 4vh;
+.recommend, .myMusic, .playlist{
     display: flex;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    justify-content: flex-start;
-    color: #9DA2B8;
-    margin-bottom: 0.5vh;
-}
-
-.recomendList ,.myMusicList ,.playlistList{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.recomendList button ,.myMusicList button ,.playlistList button{
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
     width: 100%;
-    height: 5vh;
-    border: none;
-    font-size: 1.7vh;
-    margin-bottom: 0.5vh;
-    margin-left: 2.5vh;
-    margin-top: 0.5vh;
-    font-weight: 550;
-    background-color:transparent ;
-    cursor: pointer;
-    transition: transform 0.1s ease;
-    padding-left: 1vh;
-    border-radius: 1vh;
-
-}
-
-
-.myMusic{
-    margin-left: 4vh;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: flex-start;
     flex: 1;
-    height: 100%;
-    
-    color: #9DA2B8;
-
+    margin-top: 1vw;
 }
 
+.myMusic, .playlist{
+    margin-top: 1.5vw;
+}
 
-.playlist{
-    margin-left: 4vh;
+.recommend > p, .myMusic > p, .playlist>p{
+    color: rgb(150, 150, 150);
+    font-size: 0.8vw;
+    font-weight: 500;
+}
+
+.recommendList, .myMusicList, .playlistList{
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
-    justify-content: flex-start;
-    flex: 1;
-    height: 100%;
-    
-    color: #9DA2B8;
+    margin-top: 0.5vw;
+    width: 90%;
 }
 
+.listItem{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 0.9vw;
+    font-weight: 500;
+    border-radius: 0.5vw;
+   width: 100%;
+   height: 2.5vw;
+   cursor: pointer;
+}
 
-.myMusicList button:hover, .recomendList button:hover, .playlistList button:hover{
-    transform: scale(1.1);
-    transition: transform 0.1s ease;
+.active{
     background-color: white;
 }
 
-.newPlaylistButton{
-    margin-left: 3.5vh;
-    background-color: #d860d2;
-    width: 23vh;
-    height: 6vh;
-    font-size: 2vh;
-    margin-bottom: 2vh;
-    border-radius: 2vh;
-    border: #d860d2;
-    font-weight: 530;
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
-    padding-left: 3.5vh;
-    padding-right: 5.5vh;
-    cursor: pointer;
-    transition: background-color 0.1s ease, transform 0.1s ease; 
+.listItem svg, .activeListItem svg{
+    margin-left: 1vw;
+    margin-right: 0.7vw;
+    fill: var(--c2);
 }
 
+.newPlaylist{
+    display: flex;
+    flex: 0.4;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
 
+.newPlaylistButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 87%;
+    height: 85%;
+    border-radius: 0.5vw;
+    background-color: var(--c3);
+    font-size: 0.95vw;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.newPlaylistButton svg{
+    margin-right: 1vw;
+    margin-left: 1vw;
+}
 
 .newPlaylistButton:hover{
-    background-color: #db4cd4;
-    transform: scale(1.05);
-     
+    background-color: var(--c4);
 }
