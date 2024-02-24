@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./sidebar.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Sidebar() {
   const [active, setActive] = useState("");
@@ -36,17 +37,8 @@ export default function Sidebar() {
     <div className={styles.section}>
       <div className={styles.home}>
         <div className={styles.homeButton}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-bar-chart-fill"
-            viewBox="0 0 16 16"
-          >
-            <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z" />
-          </svg>
-          Chorus
+          <Image width="25" height="25" src="/audio-waves.png" alt=""/>
+          <p>Chorus</p>
         </div>
       </div>
       <div className={styles.recommend}>

@@ -1,7 +1,9 @@
-import styles from './home.module.css'
+import HomeContent from "@/components/home/home";
 
 export default function Home(){
   return (
-    <div className="container">Homepage</div>
+    <div className="container">
+      <HomeContent/>
+    </div>
   )
 }

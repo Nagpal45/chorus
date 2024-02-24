@@ -16,11 +16,14 @@
 }
 
 .homeButton{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     font-size: 1.4vw;
     font-weight: 700;
 }
 
-.homeButton svg{
+.homeButton img{
     margin-right: 0.5vw;
 }
 
