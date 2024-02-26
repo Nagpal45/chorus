@@ -1,7 +1,21 @@
+"use client"
 import Image from "next/image";
 import styles from "./home.module.css";
+import { useState } from "react";
 
-export default function HomeContent() {
+export default function HomeContent({session}) {
+  const [liked, setLiked] = useState(false);
+  const handleLike = () => {
+    setLiked(!liked);
+  }
+
+  const [playing, setPlaying] = useState(false);
+  const handlePlaying = () =>{
+    setPlaying(true);
+  }
+
+  
+
   return (
     <div className={styles.home}>
       <div className={styles.top}>
@@ -30,9 +44,11 @@ export default function HomeContent() {
         </div>
         <div className={styles.songsList}>
             <div className={styles.songsListItem}>
-                <Image src='/sound-waves.png' height={25} width={25} alt=''/>
-                <Image src='heart-outline.svg' width={15} height={15} alt=''/>
-                <div className={styles.song}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
+               {
+                playing ? ( <Image src='/sound-waves.png' height={25} width={25} alt=''/>) : (<p className={styles.songNum}>1</p>)
+               }
+                {liked ? (<Image src='heart-fill.svg' width={15} height={15} alt='' onClick={() => handleLike()}/>) : (<Image src='heart-outline.svg' width={15} height={15} alt='' onClick={() => handleLike()}/>)}
+                <div className={styles.song}onClick={() => handlePlaying()}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
                 <Image src='three-dots.svg' width={15} height={15} alt=''/>
                 <p className={styles.time}>3:05</p>
             </div>
