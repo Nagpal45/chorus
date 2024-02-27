@@ -1,0 +1,29 @@
+.playlist{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1vw;
+    margin-top: 1vw;
+}
+
+.playlistItem{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.playlistItem img{
+    margin-right: 0.5vw;
+}
+
+.playlistName p:first-child{
+    font-size: 0.95vw;
+    font-weight: 500;
+}
+.playlistName p:nth-child(2){
+    font-size: 0.9vw;
+    color: gray;
+}
