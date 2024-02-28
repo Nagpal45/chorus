@@ -1,12 +1,11 @@
-const { signOut, signIn, LOGIN_URL } = require("./auth");
+const { signOut, signIn } = require("./auth");
 
-
-export const handleGithubLogin  = async () =>{
+export const handleSpotifyLogin  = async () =>{
     "use server"
-    await signIn("spotify", {callbackUrl: "/"});
+    await signIn("spotify",{callbackUrl: '/'});
 }
 
-export const handleGithubLogout = async () =>{
+export const handleSpotifyLogout = async () =>{
     "use server"
     await signOut();
 }

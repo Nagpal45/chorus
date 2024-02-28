@@ -108,7 +108,7 @@
     justify-content: flex-start;
     flex-direction: row;
     width: 100%;
-    font-size: 0.95vw;
+    font-size: 0.9vw;
     cursor: pointer;
 }
 
@@ -135,7 +135,7 @@
 .song p:nth-child(2){
     margin-top: 0.15vw;
     color: rgb(159, 159, 159);
-    font-size: 0.9vw;
+    font-size: 0.85vw;
 }
 
 .time{
@@ -197,4 +197,8 @@
     margin-top: 0.1vw;
     color: rgb(159, 159, 159);
     font-weight: 500;
+}
+
+.accountInfo{
+    cursor: pointer;
 }

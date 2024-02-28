@@ -1,20 +1,53 @@
-"use client"
+"use client";
 import Image from "next/image";
 import styles from "./home.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function HomeContent({session}) {
-  const [liked, setLiked] = useState(false);
-  const handleLike = () => {
-    setLiked(!liked);
-  }
+export default function HomeContent({ session }) {
+  const [liked, setLiked] = useState([]);
+  const [recents, setRecents] = useState([]);
+  const [recommend, setRecommend] = useState([]);
+  const[playingIndex, setPlayingIndex] = useState();
+  const handleLike = (index) => {
+    const updatedLikedItems = [...liked];
+    updatedLikedItems[index] = !updatedLikedItems[index];
+    setLiked(updatedLikedItems);
+  };
 
   const [playing, setPlaying] = useState(false);
-  const handlePlaying = () =>{
-    setPlaying(true);
-  }
+  const handlePlaying = (index) => {
+    setPlayingIndex(index)
+  };
 
-  
+  useEffect(() => {
+    const fetchRecently = async () => {
+      const response = await fetch(
+        "https://api.spotify.com/v1/me/player/recently-played",
+        {
+          headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setRecents(data.items);
+    };
+    fetchRecently();
+    const fetchRecommend = async () => {
+      const response = await fetch(
+        "https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA",
+        {
+          headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data.tracks);
+      setRecommend(data.tracks);
+    };
+    fetchRecommend();
+  }, [session]);
 
   return (
     <div className={styles.home}>
@@ -33,82 +66,80 @@ export default function HomeContent({session}) {
           <input type="text" placeholder="Search" />
         </div>
         <div className={styles.accountInfo}>
-            <Image src='https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600' width='40' height='40' alt=''/>
-            <p>Hello, Alisha</p>
+          <Image src={session.user.image} width="40" height="40" alt="" />
+          <p>Hello, {session.user.name}</p>
         </div>
       </div>
       <div className={styles.center}>
         <div className={styles.mainImg}>
-            <p>Releases for You</p>
-            <Image src='https://images.pexels.com/photos/7464827/pexels-photo-7464827.jpeg?auto=compress&cs=tinysrgb&w=600' width={280} height={260} alt=""/>
+          <p>Releases for You</p>
+          <Image
+            src={recommend[0]?.album?.images[0]?.url}
+            width={280}
+            height={260}
+            alt=""
+          />
         </div>
         <div className={styles.songsList}>
-            <div className={styles.songsListItem}>
-               {
-                playing ? ( <Image src='/sound-waves.png' height={25} width={25} alt=''/>) : (<p className={styles.songNum}>1</p>)
-               }
-                {liked ? (<Image src='heart-fill.svg' width={15} height={15} alt='' onClick={() => handleLike()}/>) : (<Image src='heart-outline.svg' width={15} height={15} alt='' onClick={() => handleLike()}/>)}
-                <div className={styles.song}onClick={() => handlePlaying()}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-                <Image src='three-dots.svg' width={15} height={15} alt=''/>
-                <p className={styles.time}>3:05</p>
+          {recommend.slice(0, 5).map((item,index) => (
+            <div className={styles.songsListItem} key={item.id}>
+              {playingIndex === index ? (
+                <Image src="/sound-waves.png" height={25} width={25} alt="" />
+              ) : (
+                <p className={styles.songNum}>{index+1}</p>
+              )}
+              {liked[index] ? (
+                <Image
+                  src="heart-fill.svg"
+                  width={15}
+                  height={15}
+                  alt=""
+                  onClick={() => handleLike(index)}
+                />
+              ) : (
+                <Image
+                  src="heart-outline.svg"
+                  width={15}
+                  height={15}
+                  alt=""
+                  onClick={() => handleLike(index)}
+                />
+              )}
+              <div className={styles.song} onClick={() => handlePlaying(index)}>
+                <p>{item?.name}</p>
+                <p>
+                  {item?.artists.length > 1
+                    ? `${item?.artists[0]?.name}, ${item?.artists[1]?.name}`
+                    : item?.artists[0]?.name}
+                </p>
+              </div>
+              <Image src="three-dots.svg" width={15} height={15} alt="" />
+              <p className={styles.time}>3:05</p>
             </div>
-            <div className={styles.songsListItem}>
-                <p className={styles.songNum}>2</p>
-                <Image src='heart-outline.svg' width={15} height={15} alt=''/>
-                <div className={styles.song}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-                <Image src='three-dots.svg' width={15} height={15} alt=''/>
-                <p className={styles.time}>3:05</p>
-            </div>
-            <div className={styles.songsListItem}>
-                <p className={styles.songNum}>3</p>
-                <Image src='heart-outline.svg' width={15} height={15} alt=''/>
-                <div className={styles.song}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-                <Image src='three-dots.svg' width={15} height={15} alt=''/>
-                <p className={styles.time}>3:05</p>
-            </div>
-            <div className={styles.songsListItem}>
-                <p className={styles.songNum}>4</p>
-                <Image src='heart-outline.svg' width={15} height={15} alt=''/>
-                <div className={styles.song}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-                <Image src='three-dots.svg' width={15} height={15} alt=''/>
-                <p className={styles.time}>3:05</p>
-            </div>
-            <div className={styles.songsListItem}>
-                <p className={styles.songNum}>5</p>
-                <Image src='heart-outline.svg' width={15} height={15} alt=''/>
-                <div className={styles.song}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-                <Image src='three-dots.svg' width={15} height={15} alt=''/>
-                <p className={styles.time}>3:05</p>
-            </div>
+          ))}
         </div>
       </div>
       <div className={styles.bottom}>
-      <p>Recently Played</p>
-        <div className={styles.recently}>   
-            <div className={styles.recentItem}>
-                <Image src='https://images.pexels.com/photos/4200742/pexels-photo-4200742.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' height={135} width={135}/>
-                <div className={styles.recent}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
+        <p>Recently Played</p>
+        <div className={styles.recently}>
+          {recents?.slice(0, 6).map((item) => (
+            <div className={styles.recentItem} key={item.id}>
+              <Image
+                src={item?.track?.album?.images[0]?.url}
+                alt=""
+                height={135}
+                width={135}
+              />
+              <div className={styles.recent}>
+                <p>{item?.track?.name}</p>
+                <p>
+                  {item?.track?.artists.length > 1
+                    ? `${item?.track?.artists[0]?.name}, ${item?.track?.artists[1]?.name}`
+                    : item?.track?.artists[0]?.name}
+                </p>
+              </div>
             </div>
-            <div className={styles.recentItem}>
-                <Image src='https://images.pexels.com/photos/4200742/pexels-photo-4200742.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' height={135} width={135}/>
-                <div className={styles.recent}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-            </div>
-            <div className={styles.recentItem}>
-                <Image src='https://images.pexels.com/photos/4200742/pexels-photo-4200742.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' height={135} width={135}/>
-                <div className={styles.recent}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-            </div>
-            <div className={styles.recentItem}>
-                <Image src='https://images.pexels.com/photos/4200742/pexels-photo-4200742.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' height={135} width={135}/>
-                <div className={styles.recent}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-            </div>
-            <div className={styles.recentItem}>
-                <Image src='https://images.pexels.com/photos/4200742/pexels-photo-4200742.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' height={135} width={135}/>
-                <div className={styles.recent}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-            </div>
-            <div className={styles.recentItem}>
-                <Image src='https://images.pexels.com/photos/4200742/pexels-photo-4200742.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' height={135} width={135}/>
-                <div className={styles.recent}><p>Sleep4ever</p><p> Andrew, Blackbear</p></div>
-            </div>
+          ))}
         </div>
       </div>
     </div>

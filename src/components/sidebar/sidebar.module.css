@@ -10,7 +10,7 @@
 }
 
 .sidebarList{
-    max-height: 40vw;
+    max-height: 35vw;
     overflow-y: scroll;
     scrollbar-width: none;
     display: flex;

@@ -14,7 +14,6 @@ export default function Playlists({ session }) {
         },
       });
       const data = await response.json();
-      console.log(data.items);
       setPlaylists(data.items);
     };
     fetchData();
