@@ -1,11 +1,10 @@
+'use server'
 const { signOut, signIn } = require("./auth");
 
 export const handleSpotifyLogin  = async () =>{
-    "use server"
-    await signIn("spotify",{callbackUrl: '/'});
+    await signIn("spotify",{redirectTo: '/'});
 }
 
 export const handleSpotifyLogout = async () =>{
-    "use server"
-    await signOut();
+    await signOut({redirectTo:'/'});
 }

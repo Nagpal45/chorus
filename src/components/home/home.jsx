@@ -2,21 +2,31 @@
 import Image from "next/image";
 import styles from "./home.module.css";
 import { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
+import { handleSpotifyLogout } from "@/lib/actions";
 
 export default function HomeContent({ session }) {
+  if(!session){
+    redirect('/login')
+  }
+  
   const [liked, setLiked] = useState([]);
   const [recents, setRecents] = useState([]);
   const [recommend, setRecommend] = useState([]);
-  const[playingIndex, setPlayingIndex] = useState();
+  const [playingIndex, setPlayingIndex] = useState();
+  const [dropdown, setDropdown] = useState();
+
+  const handleDropdown = () =>{
+    setDropdown(!dropdown);
+  } 
+
   const handleLike = (index) => {
     const updatedLikedItems = [...liked];
     updatedLikedItems[index] = !updatedLikedItems[index];
     setLiked(updatedLikedItems);
   };
-
-  const [playing, setPlaying] = useState(false);
   const handlePlaying = (index) => {
-    setPlayingIndex(index)
+    setPlayingIndex(index);
   };
 
   useEffect(() => {
@@ -65,28 +75,35 @@ export default function HomeContent({ session }) {
           </svg>
           <input type="text" placeholder="Search" />
         </div>
-        <div className={styles.accountInfo}>
-          <Image src={session.user.image} width="40" height="40" alt="" />
-          <p>Hello, {session.user.name}</p>
+        <div className={styles.accountInfo} onClick={handleDropdown}>
+          <Image src={session?.user?.image} width="40" height="40" alt="" />
+          <p>Hello, {session?.user?.name}</p>
         </div>
+        {dropdown && (<div className={styles.dropdown}>
+          {session?.user && <form action={handleSpotifyLogout}>
+        <button>Logout</button>
+        </form>}
+        </div>)}
       </div>
       <div className={styles.center}>
         <div className={styles.mainImg}>
           <p>Releases for You</p>
-          <Image
-            src={recommend[0]?.album?.images[0]?.url}
-            width={280}
-            height={260}
-            alt=""
-          />
+          {recommend?.length > 0 && (
+            <Image
+              src={recommend[0]?.album?.images[0]?.url}
+              width={280}
+              height={260}
+              alt=""
+            />
+          )}
         </div>
         <div className={styles.songsList}>
-          {recommend.slice(0, 5).map((item,index) => (
+          {recommend?.slice(0, 5).map((item, index) => (
             <div className={styles.songsListItem} key={item.id}>
               {playingIndex === index ? (
                 <Image src="/sound-waves.png" height={25} width={25} alt="" />
               ) : (
-                <p className={styles.songNum}>{index+1}</p>
+                <p className={styles.songNum}>{index + 1}</p>
               )}
               {liked[index] ? (
                 <Image

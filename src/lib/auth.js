@@ -51,6 +51,9 @@ export const {
       authorization: LOGIN_URL,
     }),
   ],
+  pages:{
+    signIn:"/login"
+  },
   callbacks: {
     async jwt({ token, account }) {
       if (account) {

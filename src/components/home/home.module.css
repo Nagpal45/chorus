@@ -13,6 +13,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    position: relative;
 }
 
 .searchBar{
@@ -48,6 +49,30 @@
     align-items: center;
     justify-content: center;
     margin-right: 2.5vw;
+    cursor: pointer;
+}
+
+.dropdown{
+    position: absolute;
+    right: 2vw;
+    top: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6vw;
+    height: 2.5vw;
+    background-color: white;
+    border-radius: 1vw;
+}
+.dropdown button{
+    border: none;
+    background: none;
+    width: 100%;
+    height: 100%;
+    font-size: 0.85vw;
+    font-weight: 600;
+    color: rgb(84, 84, 84);
+    cursor: pointer;
 }
 
 .accountInfo img{
@@ -199,6 +224,3 @@
     font-weight: 500;
 }
 
-.accountInfo{
-    cursor: pointer;
-}
