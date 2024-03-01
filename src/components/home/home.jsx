@@ -43,9 +43,14 @@ export default function HomeContent({ session }) {
       setRecents(data.items);
     };
     fetchRecently();
+  }, [session]);
+
+  useEffect(()=>{
     const fetchRecommend = async () => {
+      const seed_artists = recents[0]?.track?.artists[0]?.id
+      const seed_tracks = recents[0]?.track?.id
       const response = await fetch(
-        "https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA",
+        `https://api.spotify.com/v1/recommendations?seed_artists=${seed_artists}&seed_tracks=${seed_tracks}`,
         {
           headers: {
             Authorization: `Bearer ${session?.accessToken}`,
@@ -53,11 +58,10 @@ export default function HomeContent({ session }) {
         }
       );
       const data = await response.json();
-      console.log(data.tracks);
       setRecommend(data.tracks);
     };
     fetchRecommend();
-  }, [session]);
+  },[session,recents])
 
   return (
     <div className={styles.home}>
@@ -87,7 +91,7 @@ export default function HomeContent({ session }) {
       </div>
       <div className={styles.center}>
         <div className={styles.mainImg}>
-          <p>Releases for You</p>
+          <p>Recommended for You</p>
           {recommend?.length > 0 && (
             <Image
               src={recommend[0]?.album?.images[0]?.url}
@@ -148,10 +152,10 @@ export default function HomeContent({ session }) {
                 width={135}
               />
               <div className={styles.recent}>
-                <p>{item?.track?.name}</p>
+                <p>{item?.track?.name.slice(0,20)}</p>
                 <p>
                   {item?.track?.artists.length > 1
-                    ? `${item?.track?.artists[0]?.name}, ${item?.track?.artists[1]?.name}`
+                    ? `${item?.track?.artists[0]?.name}, ${item?.track?.artists[1]?.name}`.slice(0,23)
                     : item?.track?.artists[0]?.name}
                 </p>
               </div>

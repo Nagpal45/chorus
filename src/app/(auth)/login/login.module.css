@@ -1,0 +1,109 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.homeButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    font-size: 1.5vw;
+    font-weight: 700;
+    position: absolute;
+    top: 2vw;
+    left: 2vw;
+}
+
+.homeButton img{
+    margin-right: 0.5vw;
+}
+
+.left{
+    flex: 0.6;
+    height: 100%;
+}
+.left img{
+    width: 100%;
+    height: 100%;
+    border-radius: 0 1vw 1vw 0;
+}
+
+.right{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex:1;
+}
+
+.rightContainer{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 3vw;
+}
+
+
+.right p{
+    font-size: 4vw;
+    font-weight: 600;
+    color: rgb(61, 61, 61);
+}
+
+.register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2.5vw;
+    width: 100%;
+    margin-top: 3vw;
+}
+
+.register input{
+    width: 80%;
+    height:1vw;
+    border-radius: 0.5vw;
+    border: none;
+    padding: 1.5vw;
+    font-size: 1vw;
+}
+
+.register input:focus{
+    outline: none;
+}
+
+.loginButton{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+}
+
+.loginButton button, .register button{
+    border: none;
+    background: none;
+    width: 60%;
+    font-size: 1vw;
+    border-radius: 10vw;
+    padding: 1vw;   
+    font-weight: 600; 
+    cursor: pointer; 
+}
+
+.loginButton button{
+    background-color: #2fdf6d;
+    margin-top: 4vw;
+}
+
+.register button{
+    background-color: var(--c3);
+}

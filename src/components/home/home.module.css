@@ -59,8 +59,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 6vw;
-    height: 2.5vw;
+    width: 7vw;
+    height: 3vw;
     background-color: white;
     border-radius: 1vw;
 }
@@ -151,7 +151,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    width: 68%;
+    width: 65%;
 }
 
 .song p:first-child{
