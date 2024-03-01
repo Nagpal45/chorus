@@ -20,10 +20,35 @@ export default function HomeContent({ session }) {
     setDropdown(!dropdown);
   } 
 
-  const handleLike = (index) => {
-    const updatedLikedItems = [...liked];
-    updatedLikedItems[index] = !updatedLikedItems[index];
-    setLiked(updatedLikedItems);
+  const handleLike = async (index) => {
+    try {
+      const trackId = recommend[index]?.id;
+      if (!trackId) return;
+  
+      const isLiked = liked[index];
+      const method = isLiked ? 'DELETE' : 'PUT';
+  
+      const response = await fetch(
+        `https://api.spotify.com/v1/me/tracks?ids=${trackId}`,
+        {
+          method: method,
+          headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
+      if (response.ok) {
+        const updatedLikedItems = [...liked];
+        updatedLikedItems[index] = !isLiked;
+        setLiked(updatedLikedItems);
+      } else {
+        console.error('Failed to like/unlike the track');
+      }
+    } catch (error) {
+      console.error('Error occurred while liking/unliking the track:', error);
+    }
   };
   const handlePlaying = (index) => {
     setPlayingIndex(index);

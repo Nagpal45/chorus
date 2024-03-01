@@ -1,6 +1,6 @@
 import Sidebar from "@/components/sidebar/sidebar";
 import PlaySection from "@/components/playSection/playSection";
-import FriendSection from "@/components/friendSection/friendSection";
+import GestureControl from "@/components/gestureControl/gestureControl";
 import { auth } from "@/lib/auth";
 
 export default async function MainLayout({children}) {
@@ -10,7 +10,7 @@ export default async function MainLayout({children}) {
       <div className="mainContainer">
       <Sidebar session={session}/>
       {children}
-      <FriendSection/>
+      <GestureControl/>
       </div>
       <div className="playContainer">
         <PlaySection/>

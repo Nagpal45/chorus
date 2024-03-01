@@ -17,9 +17,9 @@ export default function Sidebar({ session }) {
       setActive("Foryou");
     } else if (pathname === "/library") {
       setActive("library");
-    } else if (pathname === "/video") {
-      setActive("video");
-    } else if (pathname === "/songs") {
+    } else if (pathname === "/audiobook") {
+      setActive("audiobook");
+    } else if (pathname === "/liked") {
       setActive("liked");
     } else if (pathname === "/albums") {
       setActive("albums");
@@ -87,9 +87,9 @@ export default function Sidebar({ session }) {
             </div>
             <div
               className={`${styles.listItem} ${
-                active === "video" ? styles.active : ""
+                active === "audiobook" ? styles.active : ""
               }`}
-              onClick={() => handleClick("video")}
+              onClick={() => handleClick("audiobook")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,7 @@ export default function Sidebar({ session }) {
         <div className={styles.myMusic}>
           <p>My Music</p>
           <div className={styles.myMusicList}>
-            <Link href="/songs">
+            <Link href="/liked">
               <div
                 className={`${styles.listItem} ${
                   active === "liked" ? styles.active : ""
