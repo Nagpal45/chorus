@@ -3,7 +3,7 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    flex: 1;
+    flex: 0.9;
     height: 100%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding-left: 1.3vw;
@@ -60,7 +60,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 0.7vw;
-    width: 90%;
+    width: 100%;
 }
 
 .listItem{
@@ -71,7 +71,7 @@
     font-weight: 500;
     border-radius: 0.5vw;
    width: 100%;
-   height: 2.5vw;
+   height: 2.8vw;
    cursor: pointer;
 }
 
@@ -101,9 +101,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     width: 88%;
-    height: 75%;
+    height: 68%;
     border-radius: 0.5vw;
     background-color: var(--c3);
     font-size: 0.95vw;
@@ -113,8 +113,7 @@
 }
 
 .newPlaylistButton svg{
-    margin-right: 1vw;
-    margin-left: 2vw;
+    margin-right: 0.5vw;
 }
 
 .newPlaylistButton:hover{

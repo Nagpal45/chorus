@@ -6,6 +6,16 @@
     --c5: #131110;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(91, 91, 91,0.5);
+  }
+
+
+
 *{
     margin: 0;
     padding: 0;
@@ -33,7 +43,7 @@ body{
     flex-direction: column;
     width: 99%;
     height: 98%;
-    background-color: rgba(255,255,255,0.15);
+    background-color: rgba(255,255,255,0.2);
     border-radius: 2vw;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
 }
@@ -63,7 +73,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.4);
     height: 99%;
     border-radius: 2vw;
 }

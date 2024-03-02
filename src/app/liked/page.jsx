@@ -5,7 +5,9 @@ export default async function Liked() {
     const session = await auth()
   return (
     <MainLayout>
+    <div className="container">
     <LikedSongs session = {session}/>
+    </div>
     </MainLayout>
   )
 }

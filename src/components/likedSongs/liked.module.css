@@ -1,0 +1,121 @@
+.likedContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.headSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2vw;
+    margin-left: 2vw;
+}
+
+.heading{
+    font-size: 2vw;
+    font-weight: 700;
+    margin-left: 1vw;
+}
+
+.likedSongs{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 2.5vw;
+    overflow-y: scroll;
+    max-height: 32.5vw;
+}
+
+
+.likedSongHead{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 1vw;
+    gap: 1.5vw;
+    font-weight: 600;
+}
+
+.sepLine{
+    border-top: 0.1vw solid rgb(158, 158, 158);
+    width: 92%;
+    margin-top: 1vw;
+    margin-bottom: 1.5vw;
+}
+
+.likedSongItem{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 0.9vw;
+    font-weight: 500;
+    gap: 1.5vw;
+    margin-bottom: 2vw;
+    position: relative;
+}
+
+.num{
+    width: 2.5%;
+    margin-left: 3vw;
+}
+
+.song{
+    width: 34%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.songImg{
+    border-radius: 0.3vw;
+    margin-right: 1vw;
+}
+
+.song p:nth-child(2){
+    font-size: 0.8vw;
+    color: gray;
+}
+
+.album{
+    width: 23%;
+}
+.date{
+    width: 11%;
+}
+
+.duration{
+    width: 6%;
+    margin-left: 1vw;
+}
+
+.time{
+    margin-left: 5vw;
+}
+
+.dots{
+    cursor: pointer;
+}
+
+.dropdown{
+    background-color: white;
+    border-radius: 0.5vw;
+    padding: 0.8vw;
+    position: absolute;
+    bottom: -30px;
+    right: 1vw;
+    font-size: 0.8vw;
+    cursor: pointer;
+}
+

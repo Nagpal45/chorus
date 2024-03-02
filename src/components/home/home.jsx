@@ -6,10 +6,6 @@ import { redirect } from "next/navigation";
 import { handleSpotifyLogout } from "@/lib/actions";
 
 export default function HomeContent({ session }) {
-  if(!session){
-    redirect('/login')
-  }
-  
   const [liked, setLiked] = useState([]);
   const [recents, setRecents] = useState([]);
   const [recommend, setRecommend] = useState([]);
@@ -109,9 +105,9 @@ export default function HomeContent({ session }) {
           <p>Hello, {session?.user?.name}</p>
         </div>
         {dropdown && (<div className={styles.dropdown}>
-          {session?.user && <form action={handleSpotifyLogout}>
+          <form action={handleSpotifyLogout}>
         <button>Logout</button>
-        </form>}
+        </form>
         </div>)}
       </div>
       <div className={styles.center}>
