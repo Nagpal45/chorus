@@ -108,14 +108,26 @@
     cursor: pointer;
 }
 
-.dropdown{
+.dropdown2{
     background-color: white;
     border-radius: 0.5vw;
-    padding: 0.8vw;
+    padding: 0.7vw;
     position: absolute;
-    bottom: -30px;
+    bottom: -35px;
+    right: 11.7vw;
+    font-size: 0.7vw;
+    cursor: pointer;
+    z-index: 1;
+}
+.dropdown1{
+    z-index: 1;
+    background-color: white;
+    border-radius: 0.5vw;
+    padding: 0.7vw;
+    position: absolute;
+    bottom: -35px;
     right: 1vw;
-    font-size: 0.8vw;
+    font-size: 0.7vw;
     cursor: pointer;
 }
 

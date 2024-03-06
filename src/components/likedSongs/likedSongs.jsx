@@ -104,9 +104,14 @@ export default function LikedSongs({ session }) {
             </p>
             <Image className={styles.dots} src="three-dots.svg" width={15} height={15} alt="" onClick={() => handleDropdown(index)} />
             {selectedTrack === index && (
-              <div className={styles.dropdown}>
+              <>
+              <div className={styles.dropdown1}>
                 <div onClick={() => handleRemove(item.track.id)}>Remove from Liked Songs</div>
               </div>
+              <div className={styles.dropdown2}>
+                <div onClick={() => addToPlaylist(item.track.id)}>Add to Playlist</div>
+              </div>
+              </>
             )}
           </div>
         ))}
