@@ -1,6 +1,6 @@
 .playlist{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
@@ -12,7 +12,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 100%;
+    width: 90%;
+    cursor: pointer;
 }
 
 .playlistItem img{

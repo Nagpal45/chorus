@@ -25,7 +25,7 @@ export default function Playlists({ session }) {
         <div key={item.id} className={styles.playlistItem}>
           <Image src={item?.images[0]?.url} alt="" width={40} height={40} />
           <div className={styles.playlistName}>
-            <p>{item?.name}</p>
+            <p>{item?.name.slice(0,17)}{item?.name?.length > 17 ? '...':''}</p>
             <p>{item?.owner?.display_name}</p>
           </div>
         </div>
