@@ -2,13 +2,15 @@
 import { useEffect, useState } from "react";
 import styles from "./sidebar.module.css";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Playlists from "./playlists/playlists";
+import { getUserId } from "@/lib/actions";
 
 export default function Sidebar({ session }) {
   const [active, setActive] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     if (pathname === "/") {
@@ -27,6 +29,26 @@ export default function Sidebar({ session }) {
       setActive("recent");
     }
   }, [pathname]);
+
+  const handleCreatePlaylist = async () => {
+    const userId = await getUserId();
+
+    const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${session?.accessToken}`,
+        'Content-Type': 'application/json',
+      }, body: JSON.stringify({
+        name: 'New Playlist', 
+        public: false, 
+        description: '',
+      }),
+  })
+  const playlistData = await playlistResponse.json();
+  console.log(playlistData);
+  const playlistId = playlistData.id;
+  router.push(`/playlist/${playlistId}`);
+}
 
   const handleClick = (item) => {
     setActive(item);
@@ -188,7 +210,7 @@ export default function Sidebar({ session }) {
         </div>
       </div>
       <div className={styles.newPlaylist}>
-        <Link href="/newPlaylist" className={styles.newPlaylistButton}>
+        <div className={styles.newPlaylistButton}>
           <div className={styles.newPlaylistButtonWrapper}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -203,10 +225,11 @@ export default function Sidebar({ session }) {
               <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1z" />
               <path d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5" />
             </svg>
-            <p>New Playlist</p>
+            <p onClick={handleCreatePlaylist}>New Playlist</p>
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   );
 }
+

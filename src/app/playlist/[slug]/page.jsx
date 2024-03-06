@@ -1,16 +1,18 @@
+
+import MainLayout from "@/app/mainLayout";
+import PlaylistPage from "@/components/playlistPage/playlistPage";
+PlaylistPage
 import { getUserId } from "@/lib/actions";
-import MainLayout from "../mainLayout";
-import CreatePlaylist from "@/components/createPlaylist/createPlaylist";
+
 import { auth } from "@/lib/auth";
 
-const userId = getUserId();
 
 export default async function NewPlaylist() {
   const session = await auth();
   return (
     <MainLayout>
     <div className="container">
-      <CreatePlaylist session={session} userId={userId}/>
+      <PlaylistPage session={session}/>
     </div>
     </MainLayout>
   )
