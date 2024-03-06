@@ -131,3 +131,22 @@
     cursor: pointer;
 }
 
+.menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    border-radius: 0.5vw;
+    padding: 0.5vw;
+    position: absolute;
+    bottom: -160px;
+    right: 1.1vw;
+    font-size: 0.8vw;
+    cursor: pointer;
+    gap:0.5vw;
+    width: 17vw;
+}
+

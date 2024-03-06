@@ -7,6 +7,8 @@ export default function LikedSongs({ session }) {
   const [likedSongs, setLikedSongs] = useState([]);
   const [playingIndex, setPlayingIndex] = useState();
   const [selectedTrack, setSelectedTrack] = useState(null);
+  const [userPlaylists, setUserPlaylists] = useState([]);
+  const [showMenu, setShowMenu] = useState(false)
 
   const handlePlaying = (index) => {
     setPlayingIndex(index);
@@ -32,6 +34,50 @@ export default function LikedSongs({ session }) {
       console.error("Failed to remove track from liked songs.");
     }
   };
+
+  const handleAddToPlaylist = async (playlistId, trackId) => {
+    setSelectedTrack(null);
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${session?.accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uris: [`spotify:track:${trackId}`],
+      }),
+    });
+
+    if (response.ok) {
+      console.log("Track added to playlist successfully.");
+    } else {
+      console.error("Failed to add track to playlist.");
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch user's playlists
+        const response = await fetch("https://api.spotify.com/v1/me/playlists", {
+          headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUserPlaylists(data.items);
+        } else {
+          console.error("Failed to fetch user playlists.");
+        }
+      } catch (error) {
+        console.error("Error fetching user playlists:", error);
+      }
+    };
+
+    fetchData();
+  }, [session]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,8 +155,17 @@ export default function LikedSongs({ session }) {
                 <div onClick={() => handleRemove(item.track.id)}>Remove from Liked Songs</div>
               </div>
               <div className={styles.dropdown2}>
-                <div onClick={() => addToPlaylist(item.track.id)}>Add to Playlist</div>
+                <div onClick={() => setShowMenu(true)}>Add to Playlist</div>
               </div>
+                {showMenu && (
+                  <div className={styles.menu}>
+                  {userPlaylists.map((playlist) => (
+                    <div key={playlist.id} onClick={() => handleAddToPlaylist(playlist.id, item.track.id)}>
+                      {playlist.name}
+                    </div>
+                  ))}
+                  </div>
+                )}
               </>
             )}
           </div>
