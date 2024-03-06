@@ -13,7 +13,7 @@ export default async function MainLayout({children}) {
       <GestureControl/>
       </div>
       <div className="playContainer">
-        <PlaySection/>
+        <PlaySection src={"/sample.mp3"}/>
       </div>
       </div>
   )
