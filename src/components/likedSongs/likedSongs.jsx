@@ -2,6 +2,7 @@
 import Image from "next/image";
 import styles from "./liked.module.css";
 import { useEffect, useState } from "react";
+import { useGlobalSong } from "@/app/globalSongContext";
 
 export default function LikedSongs({ session }) {
   const [likedSongs, setLikedSongs] = useState([]);
@@ -10,8 +11,11 @@ export default function LikedSongs({ session }) {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [showMenu, setShowMenu] = useState(false)
 
-  const handlePlaying = (index) => {
+  const { setGlobalSongID } = useGlobalSong();
+
+  const handlePlaying = (index, trackId) => {
     setPlayingIndex(index);
+    setGlobalSongID(trackId);
   };
 
   const handleDropdown = (index) => {
@@ -126,7 +130,7 @@ export default function LikedSongs({ session }) {
             ) : (
               <p className={styles.num}>{index + 1}</p>
             )}
-            <div className={styles.song} onClick={() => handlePlaying(index)}>
+            <div className={styles.song} onClick={() => handlePlaying(index,item.track.id)}>
               <Image className={styles.songImg} src={item?.track?.album?.images[0]?.url} alt='' width={50} height={50}/>
               <div className={styles.songDesc}>
                 <p>{item?.track?.name}</p>
