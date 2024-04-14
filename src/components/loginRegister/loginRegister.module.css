@@ -63,14 +63,14 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 2.5vw;
+    gap: 2vw;
     width: 100%;
     margin-top: 3vw;
 }
 
 .register input{
     width: 80%;
-    height:1vw;
+    height:0.8vw;
     border-radius: 0.5vw;
     border: none;
     padding: 1.5vw;

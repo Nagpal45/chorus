@@ -11,11 +11,13 @@ export default function LikedSongs({ session }) {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [showMenu, setShowMenu] = useState(false)
 
-  const { setGlobalSongID } = useGlobalSong();
+  const { setGlobalSongID, setGlobalSongs, setGlobalIndex} = useGlobalSong();
 
   const handlePlaying = (index, trackId) => {
     setPlayingIndex(index);
     setGlobalSongID(trackId);
+    setGlobalSongs(likedSongs);
+    setGlobalIndex(index);
   };
 
   const handleDropdown = (index) => {
@@ -62,7 +64,6 @@ export default function LikedSongs({ session }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch user's playlists
         const response = await fetch("https://api.spotify.com/v1/me/playlists", {
           headers: {
             Authorization: `Bearer ${session?.accessToken}`,

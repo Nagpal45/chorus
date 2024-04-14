@@ -2,8 +2,8 @@
 import Image from "next/image";
 import styles from "./home.module.css";
 import { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
 import { handleSpotifyLogout } from "@/lib/actions";
+import { useGlobalSong } from "@/app/globalSongContext";
 
 export default function HomeContent({ session }) {
   const [liked, setLiked] = useState([]);
@@ -11,6 +11,8 @@ export default function HomeContent({ session }) {
   const [recommend, setRecommend] = useState([]);
   const [playingIndex, setPlayingIndex] = useState();
   const [dropdown, setDropdown] = useState();
+
+  const{setGlobalSongID} = useGlobalSong();
 
   const handleDropdown = () =>{
     setDropdown(!dropdown);
@@ -46,8 +48,9 @@ export default function HomeContent({ session }) {
       console.error('Error occurred while liking/unliking the track:', error);
     }
   };
-  const handlePlaying = (index) => {
+  const handlePlaying = (index, trackId) => {
     setPlayingIndex(index);
+    setGlobalSongID(trackId)
   };
 
   useEffect(() => {
@@ -147,7 +150,7 @@ export default function HomeContent({ session }) {
                   onClick={() => handleLike(index)}
                 />
               )}
-              <div className={styles.song} onClick={() => handlePlaying(index)}>
+              <div className={styles.song} onClick={() => handlePlaying(index, item.id)}>
                 <p>{item?.name}</p>
                 <p>
                   {item?.artists.length > 1

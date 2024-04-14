@@ -4,9 +4,9 @@ import Image from "next/image";
 import styles from "./playSection.module.css";
 import { useState, useRef, useEffect } from "react";
 import { useGlobalSong } from "@/app/globalSongContext";
-
-export default function PlaySection({session }) {
-  const { globalSongID } = useGlobalSong();
+export default function PlaySection({ session }) {
+  const { globalSongID, globalSongs, globalIndex, setGlobalSongID } =
+    useGlobalSong();
   const [songData, setSongData] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -14,15 +14,20 @@ export default function PlaySection({session }) {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const audioRef = useRef(null);
 
-  
-
+  const songs = globalSongs;
+  useEffect(() => {
+    setCurrentSongIndex(globalIndex);
+  }, [globalIndex]);
+  console.log(songData);
+  console.log(songs);
+  console.log(currentSongIndex);
   const togglePlay = () => {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
   };
 
   useEffect(() => {
@@ -33,33 +38,36 @@ export default function PlaySection({session }) {
 
   const nextSong = () => {
     setCurrentSongIndex((currentSongIndex + 1) % songs.length);
+    setGlobalSongID(songs[currentSongIndex].track.id);
   };
 
   const prevSong = () => {
     setCurrentSongIndex((currentSongIndex - 1 + songs.length) % songs.length);
+    setGlobalSongID(songs[currentSongIndex].track.id);
   };
-
-  
 
   useEffect(() => {
     const fetchSongData = async () => {
       if (globalSongID) {
         try {
-          const response = await fetch(`https://api.spotify.com/v1/tracks/${globalSongID}`, {
-            headers: {
-              Authorization: `Bearer ${session.accessToken}`,
-            },
-          });
+          const response = await fetch(
+            `https://api.spotify.com/v1/tracks/${globalSongID}`,
+            {
+              headers: {
+                Authorization: `Bearer ${session.accessToken}`,
+              },
+            }
+          );
           if (response.ok) {
             const data = await response.json();
             console.log(data);
             setSongData(data);
-            setIsPlaying(true)
+            setIsPlaying(true);
           } else {
-            console.error('Failed to fetch song data.');
+            console.error("Failed to fetch song data.");
           }
         } catch (error) {
-          console.error('Error fetching song data:', error);
+          console.error("Error fetching song data:", error);
         }
       }
     };
@@ -83,30 +91,28 @@ export default function PlaySection({session }) {
     setVolume(event.target.value);
   };
 
-  
-
   return (
     <div className={styles.section}>
-        <div className={styles.player}>
-          <div className={styles.song}>
-            <Image
-              className={styles.songimage}
-              src={songData?.album?.images[0]?.url || '/newPlaylist.png'}
-              alt={songData?.name}
-              width={45}
-              height={45}
-            />
-            <div className={styles.songinfo}>
-              <p className={styles.name}>{songData?.name}</p>
-              <p className={styles.artist}>{songData?.artists[0]?.name}</p>
-            </div>
+      <div className={styles.player}>
+        <div className={styles.song}>
+          <Image
+            className={styles.songimage}
+            src={songData?.album?.images[0]?.url || "/newPlaylist.png"}
+            alt={songData?.name}
+            width={45}
+            height={45}
+          />
+          <div className={styles.songinfo}>
+            <p className={styles.name}>{songData?.name}</p>
+            <p className={styles.artist}>{songData?.artists[0]?.name}</p>
           </div>
-          <audio
-            ref={audioRef}
-            src={songData?.preview_url}
-            onTimeUpdate={updateTime}
-            onEnded={() => setIsPlaying(false)}
-          ></audio>
+        </div>
+        <audio
+          ref={audioRef}
+          src={songData?.preview_url}
+          onTimeUpdate={updateTime}
+          onEnded={() => setIsPlaying(false)}
+        ></audio>
         <div className={styles.controls}>
           <button onClick={prevSong}>
             {" "}

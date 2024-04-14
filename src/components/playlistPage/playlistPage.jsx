@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import styles from './playlistPage.module.css';
 import { usePathname } from "next/navigation";
+import { useGlobalSong } from "@/app/globalSongContext";
 
 export default function PlaylistPage({ session }) {
   const [input, setInput] = useState(false);
@@ -14,9 +15,11 @@ export default function PlaylistPage({ session }) {
   const imageInputRef = useRef(null);
   const [playingIndex, setPlayingIndex] = useState();
   const [selectedTrack, setSelectedTrack] = useState(null);
+  const {setGlobalSongID} = useGlobalSong();
 
-  const handlePlaying = (index) => {
+  const handlePlaying = (index, trackId) => {
     setPlayingIndex(index);
+    setGlobalSongID(trackId);
   };
 
   const handleDropdown = (index) => {
@@ -217,7 +220,7 @@ const handleRemove = async (trackId) => {
             ) : (
               <p className={styles.num}>{index + 1}</p>
             )}
-            <div className={styles.song} onClick={() => handlePlaying(index)}>
+            <div className={styles.song} onClick={() => handlePlaying(index, item.track.id)}>
               <Image className={styles.songImg} src={item?.track?.album?.images[0]?.url} alt='' width={50} height={50}/>
               <div className={styles.songDesc}>
                 <p>{item?.track?.name}</p>
