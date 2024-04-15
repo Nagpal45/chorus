@@ -7,11 +7,12 @@ import { drawHand } from "./utilities";
 import * as fp from "fingerpose";
 import styles from './gestureControl.module.css'
 import {loveYouGesture, nextGesture, playGesture, pauseGesture, previousGesture, volumeDownGesture, volumeUpGesture} from "./gestures";
+import { useGlobalSong } from "@/app/globalSongContext";
 
 export function GestureControl() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  const [emoji, setEmoji] = useState(null);
+  const {currGest, setCurrGest} = useGlobalSong();
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -59,8 +60,11 @@ export function GestureControl() {
           );
           
           console.log(gesture.gestures[maxConfidence]);
-          setEmoji(gesture.gestures[maxConfidence].name);
+          setCurrGest(gesture.gestures[maxConfidence].name);
         }
+      }
+      else{
+        setCurrGest(null)
       }
       const ctx = canvasRef.current.getContext("2d");
       drawHand(hand, ctx);
@@ -98,8 +102,8 @@ export function GestureControl() {
           }}
         />
         </div>
-      {emoji && (
-        <h1>{emoji}</h1>
+      {currGest && (
+        <h1>{currGest}</h1>
       )}
     </div>
   );

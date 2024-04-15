@@ -5,7 +5,7 @@ import styles from "./playSection.module.css";
 import { useState, useRef, useEffect } from "react";
 import { useGlobalSong } from "@/app/globalSongContext";
 export default function PlaySection({ session }) {
-  const { globalSongID, globalSongs, globalIndex, setGlobalSongID } =
+  const { globalSongID, globalSongs, globalIndex, setGlobalSongID, currGest } =
     useGlobalSong();
   const [songData, setSongData] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -21,6 +21,7 @@ export default function PlaySection({ session }) {
   console.log(songData);
   console.log(songs);
   console.log(currentSongIndex);
+
   const togglePlay = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -90,6 +91,29 @@ export default function PlaySection({ session }) {
   const handleVolumeChange = (event) => {
     setVolume(event.target.value);
   };
+
+  useEffect(()=>{
+    if (currGest == 'play' && songData) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+    else if(currGest == 'pause' && isPlaying){
+      audioRef.current.pause()
+      setIsPlaying(false)
+    }
+    else if(currGest == 'next'){
+      nextSong();
+    }
+    else if(currGest == 'previous'){
+      prevSong();
+    }
+    else if(currGest == 'volume_up'){
+      setVolume(Math.min(volume + 0.01, 1));
+    }
+    else if(currGest == 'volume_down'){
+      setVolume(Math.max(volume - 0.01, 0));
+    }
+  },[currGest,nextSong,prevSong,volume])
 
   return (
     <div className={styles.section}>
