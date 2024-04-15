@@ -1,8 +1,8 @@
 import Sidebar from "@/components/sidebar/sidebar";
 import PlaySection from "@/components/playSection/playSection";
-import GestureControl from "@/components/gestureControl/gestureControl";
 import { auth } from "@/lib/auth";
 import { GlobalSongProvider } from "./globalSongContext";
+import { GestureControl } from "@/components/gestureControl/gestureControl";
 
 export default async function MainLayout({children}) {
   const session = await auth();
