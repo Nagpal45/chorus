@@ -13,12 +13,10 @@ export default function PlaylistPage({ session }) {
   const [playlistItems, setPlaylistItems] = useState([])
   const inputRef = useRef(null);
   const imageInputRef = useRef(null);
-  const [playingIndex, setPlayingIndex] = useState();
   const [selectedTrack, setSelectedTrack] = useState(null);
-  const {setGlobalSongID, setGlobalSongs, setGlobalIndex, } = useGlobalSong();
+  const {setGlobalSongID, setGlobalSongs, setGlobalIndex, globalIndex} = useGlobalSong();
 
   const handlePlaying = (index, trackId) => {
-    setPlayingIndex(index);
     setGlobalSongID(trackId);
     setGlobalSongs(playlistItems);
     setGlobalIndex(index);
@@ -216,8 +214,8 @@ const handleRemove = async (trackId) => {
         </div>)}
         <div className={styles.sepLine}></div>
         {playlistItems?.map((item, index) => (
-          <div key={item.id} className={styles.playlistSongItem}>
-            {playingIndex === index ? (
+          <div key={item.track.id} className={styles.playlistSongItem}>
+            {globalIndex === index ? (
               <Image className={styles.num} src="/sound-waves.png" height={25} width={25} alt="" />
             ) : (
               <p className={styles.num}>{index + 1}</p>

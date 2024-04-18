@@ -5,7 +5,7 @@ import styles from "./playSection.module.css";
 import { useState, useRef, useEffect } from "react";
 import { useGlobalSong } from "@/app/globalSongContext";
 export default function PlaySection({ session }) {
-  const { globalSongID, globalSongs, globalIndex, setGlobalSongID, currGest } =
+  const { globalSongID, globalSongs, globalIndex, setGlobalSongID, currGest, setGlobalIndex } =
     useGlobalSong();
   const [songData, setSongData] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -37,11 +37,13 @@ export default function PlaySection({ session }) {
   const nextSong = () => {
     setCurrentSongIndex((currentSongIndex + 1) % songs.length);
     setGlobalSongID(songs[currentSongIndex].id || songs[currentSongIndex].track.id);
+    setGlobalIndex(currentSongIndex)
   };
 
   const prevSong = () => {
     setCurrentSongIndex((currentSongIndex - 1 + songs.length) % songs.length);
     setGlobalSongID(songs[currentSongIndex].id || songs[currentSongIndex].track.id);
+    setGlobalIndex(currentSongIndex)
   };
 
   useEffect(() => {

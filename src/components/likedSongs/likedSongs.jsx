@@ -6,15 +6,13 @@ import { useGlobalSong } from "@/app/globalSongContext";
 
 export default function LikedSongs({ session }) {
   const [likedSongs, setLikedSongs] = useState([]);
-  const [playingIndex, setPlayingIndex] = useState();
   const [selectedTrack, setSelectedTrack] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [showMenu, setShowMenu] = useState(false)
 
-  const { setGlobalSongID, setGlobalSongs, setGlobalIndex} = useGlobalSong();
+  const { setGlobalSongID, setGlobalSongs, setGlobalIndex, globalIndex} = useGlobalSong();
 
   const handlePlaying = (index, trackId) => {
-    setPlayingIndex(index);
     setGlobalSongID(trackId);
     setGlobalSongs(likedSongs);
     setGlobalIndex(index);
@@ -126,7 +124,7 @@ export default function LikedSongs({ session }) {
         <div className={styles.sepLine}></div>
         {likedSongs?.map((item, index) => (
           <div key={item.id} className={styles.likedSongItem}>
-            {playingIndex === index ? (
+            {globalIndex === index ? (
               <Image className={styles.num} src="/sound-waves.png" height={25} width={25} alt="" />
             ) : (
               <p className={styles.num}>{index + 1}</p>

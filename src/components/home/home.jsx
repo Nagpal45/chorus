@@ -9,10 +9,9 @@ export default function HomeContent({ session }) {
   const [liked, setLiked] = useState([]);
   const [recents, setRecents] = useState([]);
   const [recommend, setRecommend] = useState([]);
-  const [playingIndex, setPlayingIndex] = useState();
   const [dropdown, setDropdown] = useState();
 
-  const{setGlobalSongID, setGlobalIndex, setGlobalSongs} = useGlobalSong();
+  const{setGlobalSongID, setGlobalIndex, setGlobalSongs, globalIndex} = useGlobalSong();
 
   const handleDropdown = () =>{
     setDropdown(!dropdown);
@@ -49,7 +48,6 @@ export default function HomeContent({ session }) {
     }
   };
   const handlePlaying = (index, trackId) => {
-    setPlayingIndex(index);
     setGlobalSongID(trackId);
     setGlobalSongs(recommend);
     setGlobalIndex(index);
@@ -130,7 +128,7 @@ export default function HomeContent({ session }) {
         <div className={styles.songsList}>
           {recommend?.slice(0, 5).map((item, index) => (
             <div className={styles.songsListItem} key={item.id}>
-              {playingIndex === index ? (
+              {globalIndex === index ? (
                 <Image src="/sound-waves.png" height={25} width={25} alt="" />
               ) : (
                 <p className={styles.songNum}>{index + 1}</p>
