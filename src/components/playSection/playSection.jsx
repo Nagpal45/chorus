@@ -18,9 +18,6 @@ export default function PlaySection({ session }) {
   useEffect(() => {
     setCurrentSongIndex(globalIndex);
   }, [globalIndex]);
-  console.log(songData);
-  console.log(songs);
-  console.log(currentSongIndex);
 
   const togglePlay = () => {
     if (isPlaying) {
@@ -39,12 +36,12 @@ export default function PlaySection({ session }) {
 
   const nextSong = () => {
     setCurrentSongIndex((currentSongIndex + 1) % songs.length);
-    setGlobalSongID(songs[currentSongIndex].track.id);
+    setGlobalSongID(songs[currentSongIndex].id || songs[currentSongIndex].track.id);
   };
 
   const prevSong = () => {
     setCurrentSongIndex((currentSongIndex - 1 + songs.length) % songs.length);
-    setGlobalSongID(songs[currentSongIndex].track.id);
+    setGlobalSongID(songs[currentSongIndex].id || songs[currentSongIndex].track.id);
   };
 
   useEffect(() => {
@@ -61,7 +58,6 @@ export default function PlaySection({ session }) {
           );
           if (response.ok) {
             const data = await response.json();
-            console.log(data);
             setSongData(data);
             setIsPlaying(true);
           } else {

@@ -15,11 +15,13 @@ export default function PlaylistPage({ session }) {
   const imageInputRef = useRef(null);
   const [playingIndex, setPlayingIndex] = useState();
   const [selectedTrack, setSelectedTrack] = useState(null);
-  const {setGlobalSongID} = useGlobalSong();
+  const {setGlobalSongID, setGlobalSongs, setGlobalIndex, } = useGlobalSong();
 
   const handlePlaying = (index, trackId) => {
     setPlayingIndex(index);
     setGlobalSongID(trackId);
+    setGlobalSongs(playlistItems);
+    setGlobalIndex(index);
   };
 
   const handleDropdown = (index) => {

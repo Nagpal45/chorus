@@ -12,7 +12,7 @@ export default function HomeContent({ session }) {
   const [playingIndex, setPlayingIndex] = useState();
   const [dropdown, setDropdown] = useState();
 
-  const{setGlobalSongID} = useGlobalSong();
+  const{setGlobalSongID, setGlobalIndex, setGlobalSongs} = useGlobalSong();
 
   const handleDropdown = () =>{
     setDropdown(!dropdown);
@@ -50,7 +50,9 @@ export default function HomeContent({ session }) {
   };
   const handlePlaying = (index, trackId) => {
     setPlayingIndex(index);
-    setGlobalSongID(trackId)
+    setGlobalSongID(trackId);
+    setGlobalSongs(recommend);
+    setGlobalIndex(index);
   };
 
   useEffect(() => {
