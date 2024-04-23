@@ -15,8 +15,8 @@ export default function Sidebar({ session }) {
   useEffect(() => {
     if (pathname === "/") {
       setActive("Foryou");
-    } else if (pathname === "/library") {
-      setActive("library");
+    } else if (pathname === "/yourLibrary") {
+      setActive("yourLibrary");
     } else if (pathname === "/audiobook") {
       setActive("audiobook");
     } else if (pathname === "/liked") {
@@ -86,11 +86,12 @@ export default function Sidebar({ session }) {
                 <p>For You</p>
               </div>
             </Link>
+            <Link href = "/yourLibrary">
             <div
               className={`${styles.listItem} ${
-                active === "library" ? styles.active : ""
+                active === "yourLibrary" ? styles.active : ""
               }`}
-              onClick={() => handleClick("library")}
+              onClick={() => handleClick("yourLibrary")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -105,6 +106,8 @@ export default function Sidebar({ session }) {
               </svg>
               <p>Library</p>
             </div>
+            </Link>
+            <Link href="/audiobooks">
             <div
               className={`${styles.listItem} ${
                 active === "audiobook" ? styles.active : ""
@@ -123,6 +126,7 @@ export default function Sidebar({ session }) {
               </svg>
               <p>Audiobooks</p>
             </div>
+            </Link>
           </div>
         </div>
         <div className={styles.myMusic}>
@@ -147,6 +151,7 @@ export default function Sidebar({ session }) {
                 <p>Liked Songs</p>
               </div>
             </Link>
+            <Link href="/albums">
             <div
               className={`${styles.listItem} ${
                 active === "albums" ? styles.active : ""
@@ -166,6 +171,8 @@ export default function Sidebar({ session }) {
               </svg>
               <p>Albums</p>
             </div>
+            </Link>
+            <Link href="/artists">
             <div
               className={`${styles.listItem} ${
                 active === "artists" ? styles.active : ""
@@ -184,6 +191,8 @@ export default function Sidebar({ session }) {
               </svg>
               <p>Artists</p>
             </div>
+            </Link>
+            <Link href="/recents">
             <div
               className={`${styles.listItem} ${
                 active === "recent" ? styles.active : ""
@@ -202,6 +211,7 @@ export default function Sidebar({ session }) {
               </svg>
               <p>Recent</p>
             </div>
+            </Link>
           </div>
         </div>
         <div className={styles.playlist}>

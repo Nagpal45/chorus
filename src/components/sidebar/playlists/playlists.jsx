@@ -21,18 +21,22 @@ export default function Playlists({ session }) {
     fetchData();
   }, [session]);
 
-  const handleOpenPage = (id) =>{
+  const handleOpenPage = (id) => {
     router.push(`/playlist/${id}`)
   }
 
   return (
     <div className={styles.playlist}>
       {playlists?.map((item) => (
-        <div key={item.id} className={styles.playlistItem} onClick={()=>handleOpenPage(item.id)}>
-          <Image src={item?.images[0]?.url || "/newPlaylist.png" } alt="" width={40} height={40} />
+        <div className={styles.playlistItem} key={item.id} onClick={() => handleOpenPage(item.id)}>
+          {item.images && item.images.length > 0 ? (
+            <Image src={item.images[0].url} alt="" width={40} height={40} />
+          ) : (
+            <Image src="/newPlaylist.png" alt="" width={40} height={40} />
+          )}
           <div className={styles.playlistName}>
-            <p>{item?.name.slice(0,17)}{item?.name?.length > 17 ? '...':''}</p>
-            <p>{item?.owner?.display_name}</p>
+            <p>{item.name.slice(0, 17)}{item.name.length > 17 ? '...' : ''}</p>
+            <p>{item.owner.display_name}</p>
           </div>
         </div>
       ))}
