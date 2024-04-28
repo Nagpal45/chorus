@@ -167,7 +167,7 @@ export default function HomeContent({ session }) {
       <div className={styles.bottom}>
         <p>Recently Played</p>
         <div className={styles.recently}>
-          {recents?.slice(0, 6).map((item) => (
+          {recents?.slice(0, 7).map((item) => (
             <div className={styles.recentItem} key={item.id}>
               <Image
                 src={item?.track?.album?.images[0]?.url}

@@ -192,6 +192,9 @@
     align-items: center;
     justify-content: center;
     margin-left: 2.5vw;
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-height: 12vw;
 }
 
 .recentItem{
