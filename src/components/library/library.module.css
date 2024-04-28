@@ -1,0 +1,81 @@
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .headSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2vw;
+    margin-left: 2vw;
+  }
+  
+  .heading {
+    font-size: 2vw;
+    font-weight: 700;
+    margin-left: 1vw;
+  }
+  
+  .playlistGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px; 
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 2.5vw;
+    overflow-y: scroll;
+    max-height: 32.5vw;
+  }
+  
+  .svg{
+    margin-left: 1vw;
+    fill: var(--c2);
+  }
+  .playlistItem {
+    cursor: pointer;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+  }
+  
+  .playlistTile {
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .playlistTile:hover {
+    transform: scale(1.1); 
+    transition: transform 0.3s ease-out; 
+  }
+
+  /* yaha par border radius fix hoga*/
+
+  .playlistImage {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 1vw; 
+  }
+  
+  .playlistDetails {
+    padding: 10px;
+  }
+  
+  .playlistTitle {
+    font-weight: bold;
+  }
+  
+  .playlistAuthor {
+    font-size: 0.8vw;
+    color: grey;
+  }
+  
