@@ -4,27 +4,31 @@ import styles from "./home.module.css";
 import { useEffect, useState } from "react";
 import { handleSpotifyLogout } from "@/lib/actions";
 import { useGlobalSong } from "@/app/globalSongContext";
+import Searches from "../searches/searches";
 
 export default function HomeContent({ session }) {
   const [liked, setLiked] = useState([]);
   const [recents, setRecents] = useState([]);
   const [recommend, setRecommend] = useState([]);
   const [dropdown, setDropdown] = useState();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-  const{setGlobalSongID, setGlobalIndex, setGlobalSongs, globalIndex} = useGlobalSong();
 
-  const handleDropdown = () =>{
+  const { setGlobalSongID, setGlobalIndex, setGlobalSongs, globalIndex } = useGlobalSong();
+
+  const handleDropdown = () => {
     setDropdown(!dropdown);
-  } 
+  }
 
   const handleLike = async (index) => {
     try {
       const trackId = recommend[index]?.id;
       if (!trackId) return;
-  
+
       const isLiked = liked[index];
       const method = isLiked ? 'DELETE' : 'PUT';
-  
+
       const response = await fetch(
         `https://api.spotify.com/v1/me/tracks?ids=${trackId}`,
         {
@@ -35,7 +39,7 @@ export default function HomeContent({ session }) {
           },
         }
       );
-  
+
       if (response.ok) {
         const updatedLikedItems = [...liked];
         updatedLikedItems[index] = !isLiked;
@@ -69,7 +73,7 @@ export default function HomeContent({ session }) {
     fetchRecently();
   }, [session]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchRecommend = async () => {
       const seed_artists = recents[0]?.track?.artists[0]?.id
       const seed_tracks = recents[0]?.track?.id
@@ -85,7 +89,28 @@ export default function HomeContent({ session }) {
       setRecommend(data.tracks);
     };
     fetchRecommend();
-  },[session,recents])
+  }, [session, recents])
+
+  useEffect(() => {
+    const handleSearch = async () => {
+      try {
+        const response = await fetch(
+          `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track`,
+          {
+            headers: {
+              Authorization: `Bearer ${session?.accessToken}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setSearchResults(data.tracks.items);
+      } catch (error) {
+        console.error('Error occurred while searching:', error);
+      }
+    };
+    handleSearch();
+  }, [searchQuery, session])
+
 
   return (
     <div className={styles.home}>
@@ -101,19 +126,29 @@ export default function HomeContent({ session }) {
           >
             <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 15.800781 33 8 27.199219 8 20 C 8 12.800781 15.800781 7 21 7 Z"></path>
           </svg>
-          <input type="text" placeholder="Search" />
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
+
         <div className={styles.accountInfo} onClick={handleDropdown}>
           <Image src={session?.user?.image} width="40" height="40" alt="" />
           <p>Hello, {session?.user?.name}</p>
         </div>
         {dropdown && (<div className={styles.dropdown}>
           <form action={handleSpotifyLogout}>
-        <button>Logout</button>
-        </form>
+            <button>Logout</button>
+          </form>
         </div>)}
       </div>
-      <div className={styles.center}>
+      {searchQuery  ? (
+        <Searches searchResults={searchResults} session={session}/>
+      ):(
+        <>
+        <div className={styles.center}>
         <div className={styles.mainImg}>
           <p>Recommended for You</p>
           {recommend?.length > 0 && (
@@ -176,10 +211,10 @@ export default function HomeContent({ session }) {
                 width={135}
               />
               <div className={styles.recent}>
-                <p>{item?.track?.name.slice(0,20)}</p>
+                <p>{item?.track?.name.slice(0, 20)}</p>
                 <p>
                   {item?.track?.artists.length > 1
-                    ? `${item?.track?.artists[0]?.name}, ${item?.track?.artists[1]?.name}`.slice(0,23)
+                    ? `${item?.track?.artists[0]?.name}, ${item?.track?.artists[1]?.name}`.slice(0, 23)
                     : item?.track?.artists[0]?.name}
                 </p>
               </div>
@@ -187,6 +222,8 @@ export default function HomeContent({ session }) {
           ))}
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 }
