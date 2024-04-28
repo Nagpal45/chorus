@@ -164,7 +164,7 @@ export default function HomeContent({ session }) {
           {recommend?.slice(0, 5).map((item, index) => (
             <div className={styles.songsListItem} key={item.id}>
               {globalIndex === index ? (
-                <Image src="/sound-waves.png" height={25} width={25} alt="" />
+                <Image className={styles.num} src="/equaliser.gif" height={20} width={15} style={{opacity:"0.9"}} alt=""/>
               ) : (
                 <p className={styles.songNum}>{index + 1}</p>
               )}

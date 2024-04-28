@@ -125,7 +125,7 @@ export default function LikedSongs({ session }) {
         {likedSongs?.map((item, index) => (
           <div key={item.id} className={styles.likedSongItem}>
             {globalIndex === index ? (
-              <Image className={styles.num} src="/sound-waves.png" height={25} width={25} alt="" />
+              <Image className={styles.num} src="/equaliser.gif" height={20} width={15} style={{opacity:"0.9"}} alt=""/>
             ) : (
               <p className={styles.num}>{index + 1}</p>
             )}

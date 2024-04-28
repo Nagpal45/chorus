@@ -13,7 +13,7 @@ export function GestureControl() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const {currGest, setCurrGest} = useGlobalSong();
-  const [isGestureControlOpen, setIsGestureControlOpen] = useState(true);
+  const [isGestureControlOpen, setIsGestureControlOpen] = useState(false);
 
   const toggleGestureControl = () => {
     setIsGestureControlOpen(!isGestureControlOpen);
