@@ -13,6 +13,11 @@ export function GestureControl() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const {currGest, setCurrGest} = useGlobalSong();
+  const [isGestureControlOpen, setIsGestureControlOpen] = useState(true);
+
+  const toggleGestureControl = () => {
+    setIsGestureControlOpen(!isGestureControlOpen);
+  };
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -74,8 +79,9 @@ export function GestureControl() {
   useEffect(()=>{runHandpose()},[]);
   
   return (
-    <div className={styles.section}>
-        <div className={styles.camContainer}>
+    <div className={isGestureControlOpen ? styles.section : styles.noSection}>
+        {isGestureControlOpen && (
+          <div className={styles.camContainer}>
         <Webcam
           ref={webcamRef}
           style={{
@@ -84,7 +90,7 @@ export function GestureControl() {
             right: 0,
             textAlign: "center",
             zindex: 9,
-            width: 250,
+            height: 500,
           }}
         />
 
@@ -94,17 +100,18 @@ export function GestureControl() {
             position:"absolute",
             marginLeft: "auto",
             marginRight: "auto",
-            top: 0,
-            right: 0,
+            top: 50,
+            right: "-210px",
             textAlign: "center",
             zindex: 9,
-            width: 250,
+            height: 500,
           }}
         />
         </div>
-      {currGest && (
-        <h1>{currGest}</h1>
-      )}
+        )}
+        <button className={styles.toggleButton} onClick={toggleGestureControl}>
+          {isGestureControlOpen ? "Close Gesture Control" : "Use Gesture Control"}
+        </button>
     </div>
   );
 }

@@ -36,13 +36,13 @@ export default function PlaySection({ session }) {
 
   const nextSong = () => {
     setCurrentSongIndex((currentSongIndex + 1) % songs.length);
-    setGlobalSongID(songs[currentSongIndex].id || songs[currentSongIndex].track.id);
+    setGlobalSongID(songs[currentSongIndex]?.id || songs[currentSongIndex]?.track?.id);
     setGlobalIndex(currentSongIndex)
   };
 
   const prevSong = () => {
     setCurrentSongIndex((currentSongIndex - 1 + songs.length) % songs.length);
-    setGlobalSongID(songs[currentSongIndex].id || songs[currentSongIndex].track.id);
+    setGlobalSongID(songs[currentSongIndex]?.id || songs[currentSongIndex]?.track?.id);
     setGlobalIndex(currentSongIndex)
   };
 
