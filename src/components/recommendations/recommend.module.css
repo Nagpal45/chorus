@@ -1,0 +1,110 @@
+.recommend{
+    width: 100%;height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.recommend h3{
+    margin-top: 2vw;
+    margin-left: 3vw;
+    font-size: 2vw;
+}
+
+.moods{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin-top: 3vw;
+}
+
+.recommendations{
+    overflow-y: scroll;
+    max-height: 25vw;
+    width: 96.3%;
+    margin-top: 3vw;
+    margin-left: 3vw;
+    gap: 2vw;
+    display: flex;
+    align-items: center;justify-content: flex-start;
+    flex-direction: column;
+}
+
+.moodItem{
+    border-radius: 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    width: 10vw;
+    height: 4vw;
+    cursor: pointer;
+}
+
+.moodItem:nth-child(1){
+    background-color: lightgreen;
+}
+.moodItem:nth-child(2){
+    background-color: lightcyan;
+}
+.moodItem:nth-child(3){
+    background-color: lightsalmon;
+}
+.moodItem:nth-child(4){
+    background-color: lightgoldenrodyellow;
+}
+.moodItem:nth-child(5){
+    background-color: lightcoral;
+}
+
+.songsListItem{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 100%;
+    font-size: 0.9vw;
+    cursor: pointer;
+}
+
+.selectedMood{
+    border: solid 0.2vw black;
+}
+
+.songNum{
+    color: rgb(159, 159, 159);
+    width: 5%;
+}
+
+.songsListItem img{
+    margin-right: 2vw;
+}
+
+.song{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 67%;
+}
+
+.song p:first-child{
+    font-weight: 600;
+}
+.song p:nth-child(2){
+    margin-top: 0.15vw;
+    color: rgb(159, 159, 159);
+    font-size: 0.85vw;
+}
+
+.dots{
+    width: 10%;
+}
+
+.time{
+    color: rgb(159, 159, 159);
+    width: 5%;
+}

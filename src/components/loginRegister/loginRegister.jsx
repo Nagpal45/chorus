@@ -29,7 +29,7 @@ export default function LoginRegister() {
               <input type="password" placeholder="password" name="password" />
               <button onClick={handleChangeToLogin}>Login</button>
             </form>):(
-                <form className={styles.register} action={register}>
+                <form className={styles.register} action={handleSpotifyLogin}>
               <input type="text" placeholder="username" name="username" />
               <input type="text" placeholder="email" name="email" />
               <input type="password" placeholder="password" name="password" />
