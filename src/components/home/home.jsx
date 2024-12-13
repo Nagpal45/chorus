@@ -78,7 +78,7 @@ export default function HomeContent({ session }) {
       const seed_artists = recents[0]?.track?.artists[0]?.id
       const seed_tracks = recents[0]?.track?.id
       const response = await fetch(
-        `https://api.spotify.com/v1/recommendations?seed_artists=${seed_artists}&seed_tracks=${seed_tracks}`,
+        `https://api.spotify.com/v1/recommendations?seed_artists=${seed_artists}&seed_genres=classical%2Ccountry&seed_tracks=${seed_tracks}`,
         {
           headers: {
             Authorization: `Bearer ${session?.accessToken}`,
