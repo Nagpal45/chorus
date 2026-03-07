@@ -70,6 +70,4 @@ Once camera permissions are enabled in-browser, the TFJS model tracks your hand 
 5. **Start Grooving!**
    Navigate to [http://localhost:3000](http://localhost:3000). Log in, open the gesture controls window, grant webcam access, and play your music completely hands-free!
    
----
-*Built intricately with modern React concepts and JavaScript Ecosystem tools.*
 
